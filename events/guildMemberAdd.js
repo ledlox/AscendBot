@@ -1,4 +1,5 @@
 const config = require('../config');
+const { generateWelcomeUrl } = require('../utils/welcome');
 
 module.exports = {
   name: 'guildMemberAdd',
@@ -9,8 +10,10 @@ module.exports = {
     if (!channel) return;
 
     try {
-      const { generateWelcome } = require('../utils/welcome');
-      const buffer = await generateWelcome(member);
+      const url = await generateWelcomeUrl(member);
+      const response = await fetch(url);
+      const buffer = Buffer.from(await response.arrayBuffer());
+
       await channel.send({
         content: `Welcome to the server, ${member}!`,
         files: [{ attachment: buffer, name: 'welcome.png' }],
