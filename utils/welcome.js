@@ -1,7 +1,3 @@
-function mapHex(color) {
-  return color.replace('#', '');
-}
-
 async function generateWelcomeUrl(member) {
   const username = encodeURIComponent(member.user.username);
   const avatar = member.user.displayAvatarURL({ extension: 'png', size: 256 });
