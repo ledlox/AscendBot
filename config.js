@@ -3,8 +3,8 @@ try { require('dotenv').config(); } catch {}
 const config = {
   token: process.env.TOKEN,
   prefix: process.env.PREFIX || 'ab!',
-  welcomeChannel: process.env.WELCOME_CHANNEL || 'welcome',
-  autoRole: process.env.AUTO_ROLE || 'Member',
+  welcomeChannelId: process.env.WELCOME_CHANNEL_ID,
+  autoRoleId: process.env.AUTO_ROLE_ID,
 };
 
 module.exports = config;

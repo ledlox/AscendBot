@@ -3,9 +3,9 @@ const config = require('../config');
 module.exports = {
   name: 'guildMemberAdd',
   async execute(member) {
-    const channel = member.guild.channels.cache.find(
-      c => c.name === config.welcomeChannel
-    );
+    const channel = config.welcomeChannelId
+      ? member.guild.channels.cache.get(config.welcomeChannelId)
+      : null;
     if (!channel) return;
 
     try {
@@ -20,8 +20,8 @@ module.exports = {
       await channel.send(`Welcome to the server, ${member}!`);
     }
 
-    if (config.autoRole) {
-      const role = member.guild.roles.cache.find(r => r.name === config.autoRole);
+    if (config.autoRoleId) {
+      const role = member.guild.roles.cache.get(config.autoRoleId);
       if (role) {
         try {
           await member.roles.add(role);
